@@ -1,0 +1,38 @@
+<head>
+    <style>
+    div.ex1 {
+        background-color: lightblue;
+        width: 300px;
+        height: 250px;
+        overflow: scroll;
+    }
+    .demo div {
+        float: left;
+        clear: none;
+    }
+
+    .scroll textarea{
+        overflow-y:scroll;
+    }
+    </style>
+    </head>
+    <body>
+    <div class="demo">
+         <div>
+             <table>
+                 <tr>
+                     <textarea [(ngModel)]="IDCliente" placeholder="@IDCliente" name="" id="" cols="30" rows="2"  ></textarea>
+                 </tr>
+                 <tr>
+                        <textarea [(ngModel)]="pedido" placeholder="¿Que quieres comer?" name="" id="" cols="30" rows="10" maxlength="279"></textarea>
+                    </tr>
+             </table>
+        </div>
+        <div>
+            <table>
+                <tr><button (click)="realizarPedido()" style="height:50px;width:150px">PEDIR</button></tr>
+            </table>
+        </div>
+    </div>
+    
+    </body>
