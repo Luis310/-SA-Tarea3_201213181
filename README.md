@@ -1,27 +1,82 @@
-# AppComida
+# SA_Tarea2_201213181
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.8.
+La tarea 2 consiste en una pequeña orquestacion y simulación de servicios.
 
-## Development server
+Para poder llevar a cabo esta simulación se hicieron **3 servidores en Node.js**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+>-Servicio web para cliente
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+>-Servicio web para restaurante
 
-## Build
+>-Servicio web para motorista
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Para el web service del cliente se utilizo lo siguiente:
 
-## Running unit tests
+	const express = require('express');
+	const port = 8080;
+	const app = express();
+	var cors = require('cors');
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+	const bodyParser = require('body-parser');
+	const routes = require('./routes/routes');
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+	app.use(bodyParser.json());
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+	app.use(bodyParser.urlencoded({
+    	extended: true,
+	}));
+
+	routes(app);
+
+	const server = app.listen(port, (error) => {
+    	if (error) return console.log(`Error: ${error}`);
+ 
+    	console.log(`Server listening on port ${server.address().port}`);
+	});
+
+
+Las rutas utilizadas fueron de tipo ***POST***
+
+Para poder recibir el pedido se utilizo: 
+
+	app.post('/cliente', (request, response) => {
+  	response.header("Access-Control-Allow-Origin","*");
+  	response.header("Access-Control-Allow-Headers","Origin, X-Requested-With,Content-Type,Accept");
+  	response.status(201).send(`Pedido realizado a cocina de: ${request.body.pedido}`);
+
+  	axios.post('http://localhost:8081/cocina', {
+    	pedido: request.body.pedido
+  	})
+  	.then(function (response) {
+    	console.log(response);
+  	})
+  	.catch(function (error) {
+    	console.log(error);
+  	});
+  	console.log("PEDIDO ENTRANTE DE PARTE DEL CLIENTE: "+ request.body.IDCliente);
+  	console.log("LA ORDEN ES DE: "+request.body.pedido+" Y ES ENVIADO A COCINA");
+	});	
+
+
+Cabe destacar que se utilizo "Axios" para poder simular un cliente en el navegador, en este caso
+al recibir el pedido por parte del cliente, este se envío a la cocina por medio de otra petición
+**POST**
+
+
+Finalmente la pequeña aplicacion hecha en Angular solo funciona como disparadora para los 3 servicios. 
+
+![APP1](imgs/a1.jpg)
+
+![APP2](imgs/a2.png)
+
+Cuando se envia el pedido desde la aplicación, se puede ver el flujo en cada uno de los servicios, comenzando 
+con el Web Service del cliente.
+
+![S1](imgs/S1.png)
+
+![S2](imgs/S2.png)
+
+![S3](imgs/S3.png)
