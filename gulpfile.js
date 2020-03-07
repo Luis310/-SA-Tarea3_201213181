@@ -11,7 +11,7 @@ var fileindex= require('gulp-fileindex');
 );*/
 
 gulp.task('zip',function(){
-	return gulp.src('./**')
+	return gulp.src('./*')
 		   .pipe(zip('Tarea3_201213181.zip'))
 		   .pipe(gulp.dest('./ArtefactosFinales'));
 });
