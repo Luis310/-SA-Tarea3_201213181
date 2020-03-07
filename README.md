@@ -1,4 +1,4 @@
-#SA_TAREA5_DEVOPS[2/2]
+# SA_TAREA5_DEVOPS[2/2]
 
 La tarea 5 consiste en tomar como base la tarea anterior y publicar los artefactos en **netlify**, para ello ahora se hizo la construccion de los artefactos con la herramienta **GULP**.
 
