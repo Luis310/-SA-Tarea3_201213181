@@ -21,7 +21,7 @@ gulp.task('zip',function(){
 gulp.task('fileindex',function(){
 	return gulp.src('./ArtefactosFinales/*.zip')
 		   .pipe(fileindex())
-		   .pipe(gulp.dest('./dist'));
+		   .pipe(gulp.dest('./ArtefactosFinales'));
 });
 
 gulp.task('default',gulp.series('zip','fileindex'));
