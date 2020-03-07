@@ -1,3 +1,39 @@
+#SA_TAREA5_DEVOPS[2/2]
+
+La tarea 5 consiste en tomar como base la tarea anterior y publicar los artefactos en **netlify**, para ello ahora se hizo la construccion de los artefactos con la herramienta **GULP**.
+
+Para poder realizar esto se utilizaron dos funciones en el archivo gulp.js
+  
+    gulp.task('zip',function(){
+    return gulp.src('./*')
+       .pipe(zip('Tarea3_201213181.zip'))
+       .pipe(gulp.dest('./ArtefactosFinales'));
+    });
+
+
+
+    gulp.task('fileindex',function(){
+    return gulp.src('./ArtefactosFinales/*.zip')
+       .pipe(fileindex())
+       .pipe(gulp.dest('./ArtefactosFinales'));
+    });
+
+
+> La funcion **zip** toma como fuente los archivos en el directorio raiz y luego tiene como destino una carpeta llamada "ArtefactosFinales"
+
+> La funcion **fileindex** toma el zip creado por la funcion anterior y en un archivo llamado "index.html" publica dicho zip.
+
+
+Una vez hecho estos pasos se procede a ir a NETLIFY y configurar el sitio web para ver los artefactos claramente publicados. Los pasos a seguir para esto son:
+
+1. Ingresar a https://www.netlify.com/
+2. Ingresar con github
+3. Seleccionar el repositorio
+4. configurar el sitio web a desplegar
+5. Para cada despliegue se debe de utilizar "gulp"
+6. Desplegar el sitio web con la dirección proporcionada.
+7. Descargar el artefacto desde el sitio web publicado.
+
 # SA_Tarea3_201213181
 
 La tarea 3 consiste en una pequeña orquestacion y simulación de servicios utilizando un ESB
